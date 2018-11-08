@@ -2,9 +2,9 @@
 
 ### Introduction
 
-​    **First**, I want to thank **<a href='https://github.com/s-gupta'>s-gupta</a>** for his excellent work. Actually, I got some inspiration from his code and fixed some problems in it.
+**First**, I want to thank **<a href='https://github.com/s-gupta'>s-gupta</a>** for his excellent work. Actually, I got some inspiration from his code and fixed some problems in it.
 
-​    This repo is used to convert Depth images into HHA images. HHA is an encoding method which extract the information in the depth image which was proposed in <a href='https://arxiv.org/pdf/1407.5736.pdf'>Learning Rich Features from RGB-D Images for Object Detection and Segmentation</a>.  In this repo, I use <a href='https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html'>NYU Depth V2</a> dataset as an example.
+This repo is used to convert Depth images into HHA images. HHA is an encoding method which extract the information in the depth image which was proposed in <a href='https://arxiv.org/pdf/1407.5736.pdf'>Learning Rich Features from RGB-D Images for Object Detection and Segmentation</a>.  In this repo, I use <a href='https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html'>NYU Depth V2</a> dataset as an example.
 
 <br>
 
