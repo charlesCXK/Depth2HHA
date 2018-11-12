@@ -6,7 +6,7 @@ function HHA = saveHHA(imName, C, outDir, D, RD)
 % outDir: save path
 % imName: name of picture you want to save as
 % D and RD: depth image and corresponding raw-depth image
-  
+  addpath('./utils/depth_features');
   D = double(D)/10000;%./1000;        The unit of the element inside D is 'meter'
   missingMask = RD == 0;
   [pc, N, yDir, h, pcRot, NRot] = processDepthImage(D*100, missingMask, C);

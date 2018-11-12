@@ -5,7 +5,7 @@ function [pc, N, yDir, h, pcRot, NRot] = processDepthImage(z, missingMask, C)
 %   C is the camera matrix
 
 % AUTORIGHTS
-  addpath('./depth_features/rgbdutils');        % add path into the program.
+  addpath('./utils/depth_features/rgbdutils');        % add path into the program.
   yDirParam.angleThresh = [45 15];
   yDirParam.iter = [5 5];
   yDirParam.y0 = [0 1 0]';

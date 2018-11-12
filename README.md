@@ -11,20 +11,30 @@ This repo is used to convert Depth images into HHA images. HHA is an encoding me
 **All we need** is: 
 
 1. A depth image
-2. Camera rotation matrix ( This can be found in <a href='https://github.com/ankurhanda/nyuv2-meta-data/blob/master/camera_rotations_NYU.txt'>this repo</a>, and I also supply it in this repo)
+2. (Optional) A raw-depth image
 
 <br>
+
+----
 
 ### Usage
 
 #### 1. Modify **main.m**
 
 ```matlab
-matrix_filename = 'camera_rotations_NYU.txt';
 depth_image_root = './depth'       % dir where depth and raw depth images are in.
+saveHHA([mat2str(i-1), '_hha'], matrix, depth_image_root, D, RD);
 ```
 
-***matrix_filename*** means file name of camera rotation matrix, and ***depth_image_root*** is the directory of where depth images are in. If your camera rotation matrix file is not the same as mine, you should modify the code in this file to read in the matrix for each picture correctly.
+***depth_image_root*** is the directory of where depth images are in. The path of HHA can be defined by yourself by modifying parameters of ***saveHHA(imName, C, outDir, D, RD)***. 
+
+`imName` : name of HHA.
+
+`C` : camera matrix
+
+`outDir` : root of HHA images
+
+`D and RD` : depth and  raw-depth images. The raw-depth images are just used as masks, which you can understand from the corresponding code. So I both use depth images as this two parameters just for converience.
 
 #### 2. Modify saveHHA.m
 
@@ -39,3 +49,17 @@ Here, *D* is the depth image. You may confused about the number '10000'. Because
 #### 3. Others
 
 You can directly run ***main.m*** to use this repo.
+
+----
+
+### Results
+
+Pictures below are RGB, Depth, Raw-depth, HHA in turn.
+
+<img src='demo-data/0_rgb.png' width='400'>
+
+<img src='demo-data/0.png' width='400'>
+
+<img src='demo-data/0_raw.png' width='400'>
+
+<img src='demo-data/0_hha.png' width='400'>
