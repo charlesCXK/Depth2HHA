@@ -14,7 +14,7 @@ function R = getRMatrix(yi, yf)
 % this file (or any portion of it) in your project.
 % ---------------------------------------------------------
   if(isscalar(yf))
-    ax = yi./norm(yi);
+    ax = yi./norm(yi);		% norm(A) = max(svd(A))
     phi = yf;
   else
 	  yi = yi./norm(yi);
@@ -23,7 +23,7 @@ function R = getRMatrix(yi, yf)
 	  ax = ax./norm(ax);
 	  %Find angle of rotation
 	  % phi = acosd(abs(yi'*yf)); % we dont need to take absolute value here.
-	  phi = acosd(yi'*yf);
+	  phi = acosd(yi'*yf);		% get the degree
   end
 
 	if(abs(phi) > 0.1),

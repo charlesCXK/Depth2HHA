@@ -18,11 +18,11 @@ function [x3 y3 z3] = getPointCloudFromZ(Z, C, s)
 	if(~exist('s','var')), s = 1; end
 
 	[H, W, gr] = size(Z);
-  [xx, yy] = meshgrid(1:W,1:H);
+  	[xx, yy] = meshgrid(1:W,1:H);
 
  	%% Color camera parameters
-	cc_rgb = C(1:2,3)*s;
-	fc_rgb = diag(C(1:2,1:2))*s;
+	cc_rgb = C(1:2,3)*s;		% the first two lines of colomn-3, x0 and the y0
+	fc_rgb = diag(C(1:2,1:2))*s;		% number on the diagonal line
 
 	x3 = (xx - cc_rgb(1)) .* Z/ fc_rgb(1);
 	y3 = (yy - cc_rgb(2)) .* Z / fc_rgb(2);

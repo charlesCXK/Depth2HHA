@@ -33,9 +33,10 @@ function yDir = getYDirHelper(N, y0, thresh, iter)
 %Output:
 %	yDir: the direction of gravity vector as inferred
 
-	nn = permute(N,[3 1 2]);     
-	nn = reshape(nn,[3 numel(nn)/3]);
-	nn = nn(:,~isnan(nn(1,:)));  
+	nn = permute(N,[3 1 2]);     		% change the third dimension to the first-order. (480, 680, 3) => (3, 480, 680)
+	% 3 * x, which 'x' is the number of the point cloud set.
+	nn = reshape(nn,[3 numel(nn)/3]);	% numel: return number of elements in  a matrix.
+	nn = nn(:,~isnan(nn(1,:))); 		% remove these whose number is NAN 
 	
 	%Set it up as a optimization problem.
 
@@ -43,8 +44,8 @@ function yDir = getYDirHelper(N, y0, thresh, iter)
 	%Let us do hard assignments
 	for i = 1:iter,
 		sim0 = yDir'*nn;
-		indF = abs(sim0) > cosd(thresh);
-		indW = abs(sim0) < sind(thresh);
+		indF = abs(sim0) > cosd(thresh);		% calculate 'floor' set.    |sin(theta)| < sin(thresh) ==> |cos(theta)| > cos(thresh)
+ 		indW = abs(sim0) < sind(thresh);		% calculate 'wall' set.
 
 		NF = nn(:, indF);
 		NW = nn(:, indW);
@@ -52,9 +53,9 @@ function yDir = getYDirHelper(N, y0, thresh, iter)
 		b = zeros(3,1);
 		c = size(NF,2);
 
-		[V D] = eig(A);
+		[V D] = eig(A);		% V: eigenvectors		D: eigenvalues in its diagonal line
 		[gr ind] = min(diag(D));
 		newYDir = V(:,ind);
-		yDir = newYDir.*sign(yDir'*newYDir);
+		yDir = newYDir.*sign(yDir'*newYDir);		% sign(negative) = -1; sign(positive) = 1;
 	end
 end

@@ -6,14 +6,14 @@ function [pc, N, yDir, h, pcRot, NRot] = processDepthImage(z, missingMask, C)
 
 % AUTORIGHTS
   addpath('./utils/depth_features/rgbdutils');        % add path into the program.
-  yDirParam.angleThresh = [45 15];
+  yDirParam.angleThresh = [45 15];    % threshold to estimate the direction of the gravity
   yDirParam.iter = [5 5];
   yDirParam.y0 = [0 1 0]';
 
   normalParam.patchSize = [3 10];
 
   [X, Y, Z] = getPointCloudFromZ(z, C, 1);
-  pc = cat(3, X, Y, Z);
+  pc = cat(3, X, Y, Z);   % 组成三个通道
 
   % Compute the normals for this image
   [N1 b1] = computeNormalsSquareSupport(z./100, missingMask, normalParam.patchSize(1),...
@@ -29,6 +29,8 @@ function [pc, N, yDir, h, pcRot, NRot] = processDepthImage(z, missingMask, C)
   yDir = getYDir(N2, yDirParam);
   y0 = [0 1 0]';
   R = getRMatrix(y0, yDir);
+
+  % rotate the pc and N
   NRot = rotatePC(N, R');
   pcRot = rotatePC(pc, R');
   h = -pcRot(:,:,2);
